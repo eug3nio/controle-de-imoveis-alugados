@@ -1,2 +1,15 @@
-<span>{{ title }} app is running!</span>
-<app-edit-imovel></app-edit-imovel>
+<header>
+  <app-menu></app-menu>
+</header>
+<main>
+  <app-edit-imovel></app-edit-imovel>
+</main>
+<app-footer>
+  <span style="font-weight: bold">{{
+    this?.currentDate | date: "HH:mm:ss"
+    }}</span>
+  <span *ngIf="this.coords != undefined">
+    - Latitude: {{ this.coords?.latitude }} e Longitude:
+    {{ this.coords?.longitude }}
+  </span>
+</app-footer>

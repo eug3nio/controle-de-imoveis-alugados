@@ -11,6 +11,8 @@ import { ListLocacaoComponent } from './locacao/list/list.component';
 
 import { EditLocatarioComponent } from './locatario/edit/edit.component';
 import { ListLocatarioComponent } from './locatario/list/list.component';
+import { MenuComponent } from './menu/menu.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ListLocatarioComponent } from './locatario/list/list.component';
     EditLocacaoComponent,
     ListLocacaoComponent,
     EditLocatarioComponent,
-    ListLocatarioComponent
+    ListLocatarioComponent,
+    MenuComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
