@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col s12 m12" *ngIf="this.renderedList">
+    <div class="card">
+      <div class="card-content">
+        <table>
+          <thead>
+            <tr>
+              <th *ngIf="!agrupador.ids || agrupador.ids.length != 0">Ações</th>
+              <th *ngFor="let agrupador of agrupador.headerColuna">
+                {{agrupador}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td *ngFor="let item of agrupador.ids">
+                <a (click)="editItem(item)" class="waves-effect waves-light btn" title="Editar"><i class="material-icons">edit</i></a>
+                <a (click)="deleteItem(item)" class="waves-effect waves-light btn" title="Deletar" style="margin-left: 5px;"><i class="material-icons">delete</i></a>
+              </td>
+              <td *ngFor="let item of agrupador.conteudo">{{item.conteudo}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

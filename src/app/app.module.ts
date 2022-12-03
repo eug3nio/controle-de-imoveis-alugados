@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +16,7 @@ import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
+import { ListagemComponent } from './shared/listagem/listagem.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NgxMaskModule } from 'ngx-mask';
     ListLocatarioComponent,
     MenuComponent,
     FooterComponent,
+    ListagemComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import { NgxMaskModule } from 'ngx-mask';
     FormsModule,
     NgxMaskModule.forRoot(),
   ],
-  providers: [DatePipe],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
