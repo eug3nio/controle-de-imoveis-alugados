@@ -1,9 +1,11 @@
 export class Locatario {
   private _id!: number;
   private _nomeCompleto!: string;
+  private _email!: string;
+  private _fone!: string;
   private _cpf!: string;
   private _dtNascimento!: Date;
-  private _utilizaSeguroFianca!: boolean;
+  private _utilizaSeguroFianca: boolean = false;
   private _sexo!: number;
   private _estadoCivil!: number;
   private _tsInclusao: Date;
@@ -35,6 +37,22 @@ export class Locatario {
 
   set nomeCompleto(nomeCompleto: string) {
     this._nomeCompleto = nomeCompleto;
+  }
+
+  get email() {
+    return this._email;
+  }
+
+  set email(email: string) {
+    this._email = email;
+  }
+
+  get fone() {
+    return this._fone;
+  }
+
+  set fone(fone: string) {
+    this._fone = fone;
   }
 
   get cpf() {

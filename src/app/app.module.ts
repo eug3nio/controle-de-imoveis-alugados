@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -13,6 +14,8 @@ import { EditLocatarioComponent } from './locatario/edit/edit.component';
 import { ListLocatarioComponent } from './locatario/list/list.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
+import { FormsModule } from '@angular/forms';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -24,13 +27,15 @@ import { FooterComponent } from './footer/footer.component';
     EditLocatarioComponent,
     ListLocatarioComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    NgxMaskModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [DatePipe],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

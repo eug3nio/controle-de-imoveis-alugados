@@ -1,13 +1,68 @@
 <div class="container">
   <h3>Cadastro de Locatario</h3>
   <div class="row">
-    <form class="col s12">
+    <form class="col s12" (submit)="onSubmit()">
       <div class="row">
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Nome Completo</label>
+        <div class="input-field col s9">
+          <input id="nomeCompleto" name="nomeCompleto" type="text" class="validate"
+            [(ngModel)]="this.locatarioEdit.nomeCompleto">
+          <label for="nomeCompleto">Nome Completo</label>
+        </div>
+
+        <div class="input-field col s3">
+          <label>
+            <input type="checkbox" name="utilizaSeguroFianca" [(ngModel)]="this.locatarioEdit.utilizaSeguroFianca" />
+            <span>Utiliza Seguro Fiança?</span>
+          </label>
         </div>
       </div>
+
+      <div class="row">
+        <div class="input-field col s9">
+          <input id="email" name="email" [(ngModel)]="this.locatarioEdit.email" type="email" class="validate">
+          <label for="email">Email</label>
+          <span class="helper-text" data-error="wrong" data-success="right"></span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s3">
+          <input mask="000.000.000-99" placeholder="000.000.000-00" id="cpf" name="cpf"
+            [(ngModel)]="this.locatarioEdit.cpf" type="text" class="validate">
+          <label class="active" for="cpf">CPF</label>
+        </div>
+
+        <div class="input-field col s3">
+          <input id="dtNascimento" placeholder="01/01/2000" name="dtNascimento" mask="d0/M0/0000"
+            [(ngModel)]="this.dtNascimentoEdit" type="text" class="validate" (change)="onChangeDtNascimento();">
+          <label class="active" for="dtNascimento">Data de Nascimento</label>
+        </div>
+
+        <div class="input-field col s3">
+          <select name="selectSexo" [(ngModel)]="this.locatarioEdit.sexo">
+            <option value="" disabled selected>Selecione...</option>
+            <option value="1">Masculino</option>
+            <option value="2">Feminino</option>
+          </select>
+          <label>Sexo</label>
+        </div>
+
+        <div class="input-field col s3">
+          <select name="selectEstadoCivil" [(ngModel)]="this.locatarioEdit.estadoCivil">
+            <option value="" disabled selected>Selecione...</option>
+            <option value="1">Solteiro(a)</option>
+            <option value="2">Casado(a)</option>
+            <option value="3">Divorciado(a)</option>
+            <option value="4">Viuvo(a)</option>
+          </select>
+          <label for="estadoCivil">Estado Cívil</label>
+        </div>
+      </div>
+
+      <button class="btn waves-effect waves-light" type="submit">Salvar
+      </button>
+      <button class="btn-flat waves-effect waves-teal" style="margin-left: 5px;" type="button">Voltar
+      </button>
     </form>
   </div>
 </div>
