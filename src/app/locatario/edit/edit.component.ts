@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 import * as M from 'materialize-css';
 import { DatePipe } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-locatario',
@@ -10,12 +11,20 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./edit.component.css'],
 })
 export class EditLocatarioComponent {
+  title: string = '';
   locatarioEdit: Locatario = new Locatario();
   dtNascimentoEdit!: string | null;
 
-  constructor(public datepipe: DatePipe) {}
+  constructor(private route: ActivatedRoute, public datepipe: DatePipe) {}
 
   ngOnInit(): void {
+    let id = this.route.snapshot.params['id'];
+    if (id === undefined) {
+      this.title = 'Cadastro de Locatario';
+    } else {
+      this.title = 'Edição de Locatario';
+    }
+
     this.dtNascimentoEdit = this.datepipe.transform(
       this.locatarioEdit.dtNascimento,
       'dd/MM/yyyy'

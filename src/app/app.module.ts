@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { NgModule, LOCALE_ID } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +37,7 @@ import { ListagemComponent } from './shared/listagem/listagem.component';
     FormsModule,
     NgxMaskModule.forRoot(),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, DatePipe],
+  providers: [ DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

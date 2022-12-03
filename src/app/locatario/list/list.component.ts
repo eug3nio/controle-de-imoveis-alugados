@@ -3,6 +3,7 @@ import { Locatario } from './../../model/locatario';
 import { Component } from '@angular/core';
 import * as M from 'materialize-css';
 import { Agrupador } from 'src/app/model/agrupador';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-locatario',
@@ -15,10 +16,9 @@ export class ListLocatarioComponent {
   listaLocatarios: Locatario[] = [];
   agrupador: Agrupador = new Agrupador();
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.listaLocatarios.push(new Locatario());
     let listaNomeCompleto: ConteudoAgrupador[] = [];
     let listaCpf: ConteudoAgrupador[] = [];
     let listaEmail: ConteudoAgrupador[] = [];
@@ -52,11 +52,12 @@ export class ListLocatarioComponent {
     this.agrupador.conteudo = this.listaConteudoAgrupador;
   }
 
-  editarLocatario(id: any) {
+  editarLocatario(id: number) {
     M.toast({ html: `Editando o id ${id}` });
+    this.router.navigate(['/locatario/edit', id]);
   }
 
-  deletarLocatario(id: any) {
+  deletarLocatario(id: number) {
     M.toast({ html: `Deletando o id ${id}` });
   }
 }
