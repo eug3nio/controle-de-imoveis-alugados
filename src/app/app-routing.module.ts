@@ -58,9 +58,9 @@ const routes: Routes = [
     component: ListLocacaoComponent,
     canActivate: [AuthenticationGuard],
   },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'nao-autorizado', component: NotauthorizedComponent },
   { path: '**', component: NotFoundComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({
