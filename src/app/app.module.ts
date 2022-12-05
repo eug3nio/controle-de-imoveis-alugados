@@ -17,6 +17,9 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { ListagemComponent } from './shared/listagem/listagem.component';
+import { NotauthorizedComponent } from './not-authorized/not-authorized.component';
+import { LoginComponent } from './login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { ListagemComponent } from './shared/listagem/listagem.component';
     MenuComponent,
     FooterComponent,
     ListagemComponent,
+    NotauthorizedComponent,
+    LoginComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
