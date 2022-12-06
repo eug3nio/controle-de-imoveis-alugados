@@ -12,6 +12,7 @@ export class Locatario {
   private _tsAlteracao!: Date;
 
   constructor() {
+    this._id = 0;
     this._tsInclusao = new Date();
   }
 
