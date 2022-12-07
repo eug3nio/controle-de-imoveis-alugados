@@ -25,6 +25,9 @@ export class EditLocatarioComponent {
   ) {}
 
   ngOnInit(): void {
+    var elemsSelect = document.querySelectorAll('select');
+    M.FormSelect.init(elemsSelect, {});
+
     Shared.initializeWebStorage();
 
     let id = this.route.snapshot.params['id'];
@@ -48,10 +51,7 @@ export class EditLocatarioComponent {
     );
   }
 
-  ngAfterViewInit(): void {
-    var elemsSelect = document.querySelectorAll('select');
-    M.FormSelect.init(elemsSelect, {});
-  }
+  ngAfterViewInit(): void {}
 
   onChangeDtNascimento() {
     if (this.dtNascimentoEdit != null) {

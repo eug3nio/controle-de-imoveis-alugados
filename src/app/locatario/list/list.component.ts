@@ -24,7 +24,9 @@ export class ListLocatarioComponent {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  pesquisar() {
     this.listaLocatarios = this.locatarioStorageService.getLocatarios();
     let listaNomeCompleto: ConteudoAgrupador[] = [];
     let listaCpf: ConteudoAgrupador[] = [];
@@ -60,12 +62,11 @@ export class ListLocatarioComponent {
   }
 
   editarLocatario(id: number) {
-    M.toast({ html: `Editando o id ${id}` });
     this.router.navigate(['/locatario/edit', id]);
   }
 
   deletarLocatario(id: number) {
     this.locatarioStorageService.delete(id);
-    M.toast({ html: `Deletando o id ${id}` });
+    this.pesquisar();
   }
 }

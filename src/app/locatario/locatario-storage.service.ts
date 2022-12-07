@@ -54,7 +54,7 @@ export class LocatarioStorageService {
 
   getById(id: number): Locatario | undefined {
     for (let loc of this.getLocatarios()) {
-      if (loc.id?.valueOf() === id?.valueOf()) {
+      if (loc.id == id) {
         return loc;
       }
     }

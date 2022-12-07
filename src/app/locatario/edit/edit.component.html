@@ -6,7 +6,7 @@
         <div class="input-field col s9">
           <input id="nomeCompleto" name="nomeCompleto" #nomeCompleto="ngModel" type="text" class="validate"
             [(ngModel)]="this.locatarioEdit.nomeCompleto" required>
-          <label for="nomeCompleto">Nome Completo</label>
+          <label class="active" for="nomeCompleto">Nome Completo</label>
           <div class="red-text" [hidden]="nomeCompleto.valid || nomeCompleto.untouched">
             Por favor, informe o Nome Completo.
           </div>
@@ -23,7 +23,7 @@
       <div class="row">
         <div class="input-field col s9">
           <input id="email" name="email" [(ngModel)]="this.locatarioEdit.email" type="email" class="validate" required>
-          <label for="email">Email</label>
+          <label class="active" for="email">Email</label>
           <span class="helper-text" data-error="wrong" data-success="right"></span>
         </div>
       </div>
@@ -51,17 +51,15 @@
         <div class="input-field col s3">
           <select class="validate" id="selectSexo" name="selectSexo" #selectSexo="ngModel"
             [(ngModel)]="this.locatarioEdit.sexo" required>
-            <option value="" disabled selected>Selecione...</option>
-            <option value="1">Masculino</option>
+            <option value="1" selected>Masculino</option>
             <option value="2">Feminino</option>
           </select>
-          <label class="active" for="selectSexo">Sexo</label>
+          <label for="selectSexo">Sexo</label>
         </div>
 
         <div class="input-field col s3">
           <select class="validate" name="selectEstadoCivil" [(ngModel)]="this.locatarioEdit.estadoCivil" required>
-            <option value="" disabled selected>Selecione...</option>
-            <option value="1">Solteiro(a)</option>
+            <option value="1" selected>Solteiro(a)</option>
             <option value="2">Casado(a)</option>
             <option value="3">Divorciado(a)</option>
             <option value="4">Viuvo(a)</option>
