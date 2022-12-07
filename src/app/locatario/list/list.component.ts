@@ -1,3 +1,4 @@
+import { LocatarioStorageService } from './../locatario-storage.service';
 import { ConteudoAgrupador } from './../../model/conteudoAgrupador';
 import { Locatario } from './../../model/locatario';
 import { Component } from '@angular/core';
@@ -9,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-list-locatario',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css'],
+  providers: [LocatarioStorageService],
 })
 export class ListLocatarioComponent {
   listaHeaders = ['Nome Completo', 'CPF', 'E-mail', 'Telefone'];
@@ -16,9 +18,14 @@ export class ListLocatarioComponent {
   listaLocatarios: Locatario[] = [];
   agrupador: Agrupador = new Agrupador();
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private locatarioStorageService: LocatarioStorageService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.listaLocatarios = this.locatarioStorageService.getLocatarios();
     let listaNomeCompleto: ConteudoAgrupador[] = [];
     let listaCpf: ConteudoAgrupador[] = [];
     let listaEmail: ConteudoAgrupador[] = [];
@@ -58,6 +65,7 @@ export class ListLocatarioComponent {
   }
 
   deletarLocatario(id: number) {
+    this.locatarioStorageService.delete(id);
     M.toast({ html: `Deletando o id ${id}` });
   }
 }
