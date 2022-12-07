@@ -2,5 +2,13 @@
   "locatarios": [{}],
   "imoveis": [{}],
   "contratos": [{}],
-  "usuarios": [{}]
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "Eugenio Duarte Merlin",
+      "email": "eugenio@utfpr.com.br",
+      "senha": "eugenio123",
+      "isAdmin": true
+    }
+  ]
 }

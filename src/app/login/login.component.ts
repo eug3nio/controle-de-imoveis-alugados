@@ -1,4 +1,5 @@
 import { Constantes } from './../util/constantes';
+import { UsuarioPromiseService } from './../services/usuario-promise.service';
 import { Usuario } from './../model/usuario';
 import { Component } from '@angular/core';
 import { LoginService } from '../services/login.service';
@@ -8,27 +9,39 @@ import { WebStorageUtil } from '../util/web-storage-util';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
+  providers: [UsuarioPromiseService],
 })
 export class LoginComponent {
-  usuario!: Usuario;
   loginUsuario!: Usuario;
-  constructor(private loginService: LoginService) {}
+  constructor(
+    private loginService: LoginService,
+    private usuarioPromiseService: UsuarioPromiseService
+  ) {}
 
   ngOnInit(): void {
     this.loginUsuario = new Usuario('', '');
-    this.usuario = WebStorageUtil.get(Constantes.USERNAME_KEY);
   }
 
   onLogin() {
-    if (
-      this.loginUsuario.email === this.usuario.email &&
-      this.loginUsuario.senha === this.usuario.senha
-    ) {
-      this.loginService.login();
-    } else {
-      M.toast({
-        html: 'Oppsss! Por favor, verifique seu nome de usuário ou senha e tente novamente!',
+    this.usuarioPromiseService
+      .getByEmail(this.loginUsuario.email)
+      .then((u: Usuario[] | undefined) => {
+        if (u != undefined) {
+          let usuario = u[0];
+          if (this.loginUsuario.senha != usuario.senha) {
+            M.toast({
+              html: 'Oppsss! Por favor, verifique o email e a senha informados e tente novamente!',
+            });
+          } else {
+            WebStorageUtil.set(Constantes.USERNAME_KEY, usuario);
+            this.loginService.login();
+          }
+        }
+      })
+      .catch(() => {
+        M.toast({
+          html: 'Oppsss! Por favor, verifique o email informado tente novamente!',
+        });
       });
-    }
   }
 }

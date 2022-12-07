@@ -26,6 +26,11 @@ export class AuthenticationGuard implements CanActivate {
     let url: string = state.url;
     let user: Usuario = WebStorageUtil.get(Constantes.USERNAME_KEY) as Usuario;
 
+    if (user == undefined) {
+      this.router.navigateByUrl('/login');
+      return false;
+    }
+
     if (!user) {
       //redireciona para uma view para explicar o que aconteceu
       this.router.navigateByUrl('/nao-autorizado');
