@@ -1,21 +1,21 @@
 export class Usuario {
   id!: number;
   nome?: string;
-  username: string;
+  email: string;
   senha: string;
   cpf?: string;
   dtNascimento?: Date;
   isAdmin: boolean;
 
-  constructor(username: string, senha: string, isAdmin: boolean = false) {
+  constructor(email: string, senha: string, isAdmin: boolean = false) {
     this.id = Math.round(Math.random() * 1000);
-    this.username = username;
+    this.email = email;
     this.senha = senha;
     this.isAdmin = isAdmin;
   }
 
   public static clone(user: Usuario) {
-    let u: Usuario = new Usuario(user.username, user.senha, user.isAdmin);
+    let u: Usuario = new Usuario(user.email, user.senha, user.isAdmin);
     u.nome = user.nome;
     u.cpf = user.cpf;
     u.dtNascimento = user.dtNascimento;
@@ -28,7 +28,7 @@ export class Usuario {
    * @returns
    */
   public static toWS(user: Usuario) {
-    let u: Usuario = new Usuario(user.username, user.senha, user.isAdmin);
+    let u: Usuario = new Usuario(user.email, user.senha, user.isAdmin);
     u.nome = user.nome;
     u.cpf = user.cpf;
     u.dtNascimento = user.dtNascimento;
