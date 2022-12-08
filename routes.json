@@ -1,3 +1,4 @@
 {
-  "/usuarios/:email" : "/usuarios?email=:email"
+  "/usuarios/:email" : "/usuarios?email=:email",
+  "/locatarios/:id" : "/locatarios?id=:id"
 }

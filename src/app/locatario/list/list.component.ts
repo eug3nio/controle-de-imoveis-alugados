@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import * as M from 'materialize-css';
 import { Agrupador } from 'src/app/model/agrupador';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LocatarioPromiseService } from 'src/app/services/locatario-promise.service';
 
 @Component({
   selector: 'app-list-locatario',
@@ -15,10 +16,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ListLocatarioComponent {
   listaHeaders = ['Nome Completo', 'CPF', 'E-mail', 'Telefone'];
   listaConteudoAgrupador: ConteudoAgrupador[] = [];
-  listaLocatarios: Locatario[] = [];
+  listaLocatarios: Locatario[] | undefined = [];
   agrupador: Agrupador = new Agrupador();
 
   constructor(
+    private locatarioPromiseService: LocatarioPromiseService,
     private locatarioStorageService: LocatarioStorageService,
     private route: ActivatedRoute,
     private router: Router
@@ -27,38 +29,31 @@ export class ListLocatarioComponent {
   ngOnInit(): void {}
 
   pesquisar() {
-    this.listaLocatarios = this.locatarioStorageService.getLocatarios();
-    let listaNomeCompleto: ConteudoAgrupador[] = [];
-    let listaCpf: ConteudoAgrupador[] = [];
-    let listaEmail: ConteudoAgrupador[] = [];
-    let listaTelefone: ConteudoAgrupador[] = [];
+    this.agrupador = new Agrupador();
+    this.listaLocatarios = [];
+    this.listaConteudoAgrupador = [];
+    this.locatarioPromiseService.getAll().then((loc) => {
+      this.listaLocatarios = loc;
 
-    listaNomeCompleto.push(
-      new ConteudoAgrupador(
-        this.listaLocatarios.map((item) => item.nomeCompleto)
-      )
-    );
-    listaCpf.push(
-      new ConteudoAgrupador(this.listaLocatarios.map((item) => item.cpf))
-    );
-    listaEmail.push(
-      new ConteudoAgrupador(this.listaLocatarios.map((item) => item.email))
-    );
-    listaTelefone.push(
-      new ConteudoAgrupador(this.listaLocatarios.map((item) => item.fone))
-    );
+      if (this.listaLocatarios != undefined) {
+        let listaConteudoAgrupador: ConteudoAgrupador[] = [];
+        this.listaLocatarios.forEach((locatario) => {
+          let conteudo = new ConteudoAgrupador(locatario.id, [
+            locatario.nomeCompleto,
+            locatario.cpf,
+            locatario.email,
+            locatario.fone,
+          ]);
+          this.listaConteudoAgrupador.push(conteudo);
+        });
 
-    this.listaConteudoAgrupador =
-      this.listaConteudoAgrupador.concat(listaNomeCompleto);
-    this.listaConteudoAgrupador = this.listaConteudoAgrupador.concat(listaCpf);
-    this.listaConteudoAgrupador =
-      this.listaConteudoAgrupador.concat(listaEmail);
-    this.listaConteudoAgrupador =
-      this.listaConteudoAgrupador.concat(listaTelefone);
+        console.log(this.listaConteudoAgrupador);
 
-    this.agrupador.ids = this.listaLocatarios.map((item) => item.id);
-    this.agrupador.headerColuna = this.listaHeaders;
-    this.agrupador.conteudo = this.listaConteudoAgrupador;
+        this.agrupador.headerColuna = this.listaHeaders;
+        this.agrupador.conteudo = this.listaConteudoAgrupador;
+        console.log(this.agrupador);
+      }
+    });
   }
 
   editarLocatario(id: number) {

@@ -1,7 +1,30 @@
 {
-  "locatarios": [{}],
-  "imoveis": [{}],
-  "contratos": [{}],
+  "locatarios": [
+    {
+      "utilizaSeguroFianca": false,
+      "sexo": "1",
+      "estadoCivil": "1",
+      "id": 997,
+      "tsInclusao": "2022-12-07T23:37:01.191Z",
+      "nomeCompleto": "Eugenio",
+      "email": "teste@teste.com.br",
+      "cpf": "11111111111",
+      "dtNascimento": "2000-01-01T02:00:00.000Z"
+    },
+    {
+      "utilizaSeguroFianca": false,
+      "sexo": "1",
+      "estadoCivil": "1",
+      "id": 918,
+      "tsInclusao": "2022-12-07T23:46:33.381Z",
+      "nomeCompleto": "teste",
+      "email": "teste2@gmail.com",
+      "cpf": "22222222222",
+      "dtNascimento": "2000-02-02T02:00:00.000Z"
+    }
+  ],
+  "imoveis": [],
+  "contratos": [],
   "usuarios": [
     {
       "id": 1,

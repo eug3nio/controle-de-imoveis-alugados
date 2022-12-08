@@ -5,19 +5,19 @@
         <table>
           <thead>
             <tr>
-              <th *ngIf="!agrupador.ids || agrupador.ids.length != 0">Ações</th>
+              <th *ngIf="!agrupador.conteudo || agrupador.conteudo.length != 0">Ações</th>
               <th *ngFor="let agrupador of agrupador.headerColuna">
                 {{agrupador}}
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td *ngFor="let item of agrupador.ids">
-                <a (click)="editItem(item)" class="waves-effect waves-light btn" title="Editar"><i class="material-icons">edit</i></a>
-                <a (click)="deleteItem(item)" class="waves-effect waves-light btn" title="Deletar" style="margin-left: 5px;"><i class="material-icons">delete</i></a>
+            <tr *ngFor="let item of agrupador.conteudo">
+              <td>
+                <a (click)="editItem(item.id)" class="waves-effect waves-light btn" title="Editar"><i class="material-icons">edit</i></a>
+                <a (click)="deleteItem(item.id)" class="waves-effect waves-light btn" title="Deletar" style="margin-left: 5px;"><i class="material-icons">delete</i></a>
               </td>
-              <td *ngFor="let item of agrupador.conteudo">{{item.conteudo}}</td>
+              <td *ngFor="let cont of item.conteudo">{{cont}}</td>
             </tr>
           </tbody>
         </table>
