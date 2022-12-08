@@ -21,6 +21,7 @@ import { ListagemComponent } from './shared/listagem/listagem.component';
 import { NotauthorizedComponent } from './not-authorized/not-authorized.component';
 import { LoginComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CPFPipe } from './pipes/cpf.pipe';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NotauthorizedComponent,
     LoginComponent,
     NotFoundComponent,
+    CPFPipe,
   ],
   imports: [
     HttpClientModule,
@@ -45,7 +47,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     FormsModule,
     NgxMaskModule.forRoot(),
   ],
-  providers: [ DatePipe],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

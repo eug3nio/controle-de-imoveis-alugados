@@ -1,8 +1,8 @@
-import { ConteudoAgrupador } from './conteudoAgrupador';
+import { AgrupadorLinha } from './agrupador-linha';
 
 export class Agrupador {
   private _headerColuna!: string[];
-  private _conteudo!: ConteudoAgrupador[];
+  private _linhas!: AgrupadorLinha[];
 
   constructor() {}
 
@@ -14,11 +14,11 @@ export class Agrupador {
     this._headerColuna = headerColuna;
   }
 
-  get conteudo() {
-    return this._conteudo;
+  get linhas() {
+    return this._linhas;
   }
 
-  set conteudo(conteudo: ConteudoAgrupador[]) {
-    this._conteudo = conteudo;
+  set linhas(linhas: AgrupadorLinha[]) {
+    this._linhas = linhas;
   }
 }

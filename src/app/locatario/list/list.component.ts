@@ -1,8 +1,8 @@
+import { AgrupadorLinhaConteudo } from './../../model/agrupador-linha-conteudo';
 import { LocatarioStorageService } from './../locatario-storage.service';
-import { ConteudoAgrupador } from './../../model/conteudoAgrupador';
+import { AgrupadorLinha } from '../../model/agrupador-linha';
 import { Locatario } from './../../model/locatario';
 import { Component } from '@angular/core';
-import * as M from 'materialize-css';
 import { Agrupador } from 'src/app/model/agrupador';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocatarioPromiseService } from 'src/app/services/locatario-promise.service';
@@ -15,7 +15,7 @@ import { LocatarioPromiseService } from 'src/app/services/locatario-promise.serv
 })
 export class ListLocatarioComponent {
   listaHeaders = ['Nome Completo', 'CPF', 'E-mail', 'Telefone'];
-  listaConteudoAgrupador: ConteudoAgrupador[] = [];
+  listaLinhas: AgrupadorLinha[] = [];
   listaLocatarios: Locatario[] | undefined = [];
   agrupador: Agrupador = new Agrupador();
 
@@ -31,26 +31,23 @@ export class ListLocatarioComponent {
   pesquisar() {
     this.agrupador = new Agrupador();
     this.listaLocatarios = [];
-    this.listaConteudoAgrupador = [];
+    this.listaLinhas = [];
     this.locatarioPromiseService.getAll().then((loc) => {
       this.listaLocatarios = loc;
 
       if (this.listaLocatarios != undefined) {
-        let listaConteudoAgrupador: ConteudoAgrupador[] = [];
         this.listaLocatarios.forEach((locatario) => {
-          let conteudo = new ConteudoAgrupador(locatario.id, [
-            locatario.nomeCompleto,
-            locatario.cpf,
-            locatario.email,
-            locatario.fone,
+          let conteudo = new AgrupadorLinha(locatario.id, [
+            new AgrupadorLinhaConteudo(locatario.nomeCompleto, false),
+            new AgrupadorLinhaConteudo(locatario.cpf, true),
+            new AgrupadorLinhaConteudo(locatario.email, false),
+            new AgrupadorLinhaConteudo(locatario.fone, false),
           ]);
-          this.listaConteudoAgrupador.push(conteudo);
+          this.listaLinhas.push(conteudo);
         });
 
-        console.log(this.listaConteudoAgrupador);
-
         this.agrupador.headerColuna = this.listaHeaders;
-        this.agrupador.conteudo = this.listaConteudoAgrupador;
+        this.agrupador.linhas = this.listaLinhas;
         console.log(this.agrupador);
       }
     });

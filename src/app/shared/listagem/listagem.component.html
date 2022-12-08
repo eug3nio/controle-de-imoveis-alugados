@@ -5,19 +5,24 @@
         <table>
           <thead>
             <tr>
-              <th *ngIf="!agrupador.conteudo || agrupador.conteudo.length != 0">Ações</th>
+              <th *ngIf="!agrupador.linhas || agrupador.linhas.length != 0">Ações</th>
               <th *ngFor="let agrupador of agrupador.headerColuna">
                 {{agrupador}}
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of agrupador.conteudo">
+            <tr *ngFor="let linha of agrupador.linhas">
               <td>
-                <a (click)="editItem(item.id)" class="waves-effect waves-light btn" title="Editar"><i class="material-icons">edit</i></a>
-                <a (click)="deleteItem(item.id)" class="waves-effect waves-light btn" title="Deletar" style="margin-left: 5px;"><i class="material-icons">delete</i></a>
+                <a (click)="editItem(linha.id)" class="waves-effect waves-light btn" title="Editar"><i
+                    class="material-icons">edit</i></a>
+                <a (click)="deleteItem(linha.id)" class="waves-effect waves-light btn" title="Deletar"
+                  style="margin-left: 5px;"><i class="material-icons">delete</i></a>
               </td>
-              <td *ngFor="let cont of item.conteudo">{{cont}}</td>
+              <td *ngFor="let conteudo of linha.conteudos">
+                <span *ngIf="conteudo.ehCpf">{{conteudo.conteudo | CPF}}</span>
+                <span *ngIf="!conteudo.ehCpf">{{conteudo.conteudo}}</span>
+              </td>
             </tr>
           </tbody>
         </table>
