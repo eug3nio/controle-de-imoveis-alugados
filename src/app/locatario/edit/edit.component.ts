@@ -37,7 +37,7 @@ export class EditLocatarioComponent {
     } else {
       let buscaLocatario = this.locatarioPromiseService
         .getById(id)
-        .then((locs: Locatario[] | undefined) => {
+        .subscribe((locs: Locatario[] | undefined) => {
           if (locs != undefined) {
             this.locatarioEdit = locs[0];
             this.title = 'Edição de Locatario';
@@ -45,10 +45,6 @@ export class EditLocatarioComponent {
             this.locatarioEdit = new Locatario();
             this.title = 'Cadastro de Locatario';
           }
-        })
-        .catch(() => {
-          this.locatarioEdit = new Locatario();
-          this.title = 'Cadastro de Locatario';
         });
     }
 
@@ -72,7 +68,7 @@ export class EditLocatarioComponent {
   onSubmit() {
     if (this.locatarioEdit.id === 0) {
       this.locatarioEdit.id = Math.round(Math.random() * 1000);
-      this.locatarioPromiseService.save(this.locatarioEdit).then((loc) => {
+      this.locatarioPromiseService.save(this.locatarioEdit).subscribe((loc) => {
         console.log(loc);
       });
 
@@ -80,9 +76,11 @@ export class EditLocatarioComponent {
       this.title = 'Edição de Locatario';
     } else {
       this.locatarioEdit.tsAlteracao = new Date();
-      this.locatarioPromiseService.patch(this.locatarioEdit).then((loc) => {
-        console.log(loc);
-      });
+      this.locatarioPromiseService
+        .patch(this.locatarioEdit)
+        .subscribe((loc) => {
+          console.log(loc);
+        });
       M.toast({ html: 'Alterado salvo com sucesso!' });
     }
   }

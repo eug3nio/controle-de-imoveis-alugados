@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs';
 import { Locatario } from './../model/locatario';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -14,37 +15,39 @@ export class LocatarioPromiseService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getAll(): Promise<Locatario[] | undefined> {
-    return this.httpClient.get<Locatario[]>(`${this.URL}`).toPromise();
+  getAll(): Observable<Locatario[] | undefined> {
+    return this.httpClient.get<Locatario[]>(`${this.URL}`).pipe();
   }
 
-  getById(id: number): Promise<Locatario[] | undefined> {
-    return this.httpClient.get<Locatario[]>(`${this.URL}?id=${id}`).toPromise();
+  getById(id: number): Observable<Locatario[] | undefined> {
+    const query: HttpParams = new HttpParams().set('id', id);
+    const options = id ? { params: query } : {};
+    return this.httpClient.get<Locatario[]>(`${this.URL}`, options).pipe();
   }
 
-  save(locatario: Locatario): Promise<Locatario | undefined> {
+  save(locatario: Locatario): Observable<Locatario | undefined> {
     return this.httpClient
       .post<Locatario>(this.URL, JSON.stringify(locatario), this.httpOptions)
-      .toPromise();
+      .pipe();
   }
 
-  patch(locatario: Locatario): Promise<Locatario | undefined> {
+  patch(locatario: Locatario): Observable<Locatario | undefined> {
     return this.httpClient
       .patch<Locatario>(
         `${this.URL}?id=${locatario.id}`,
         JSON.stringify(locatario),
         this.httpOptions
       )
-      .toPromise();
+      .pipe();
   }
 
-  update(locatario: Locatario): Promise<Locatario | undefined> {
+  update(locatario: Locatario): Observable<Locatario | undefined> {
     return this.httpClient
       .put<Locatario>(
         `${this.URL}?id=${locatario.id}`,
         JSON.stringify(locatario),
         this.httpOptions
       )
-      .toPromise();
+      .pipe();
   }
 }

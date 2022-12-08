@@ -32,7 +32,7 @@ export class ListLocatarioComponent {
     this.agrupador = new Agrupador();
     this.listaLocatarios = [];
     this.listaLinhas = [];
-    this.locatarioPromiseService.getAll().then((loc) => {
+    this.locatarioPromiseService.getAll().subscribe((loc) => {
       this.listaLocatarios = loc;
 
       if (this.listaLocatarios != undefined) {

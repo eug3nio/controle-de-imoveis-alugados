@@ -25,7 +25,7 @@ export class LoginComponent {
   onLogin() {
     this.usuarioPromiseService
       .getByEmail(this.loginUsuario.email)
-      .then((u: Usuario[] | undefined) => {
+      .subscribe((u: Usuario[] | undefined) => {
         if (u != undefined) {
           let usuario = u[0];
           if (this.loginUsuario.senha != usuario.senha) {
@@ -37,11 +37,6 @@ export class LoginComponent {
             this.loginService.login();
           }
         }
-      })
-      .catch(() => {
-        M.toast({
-          html: 'Oppsss! Por favor, verifique o email informado tente novamente!',
-        });
       });
   }
 }
